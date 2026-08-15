@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="100%" height="auto" role="img" aria-label="solar bypasser, fast, free">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#1a0606"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff2d2d"/>
+      <stop offset="50%" stop-color="#ff6a3d"/>
+      <stop offset="100%" stop-color="#ff2d2d"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="200" fill="url(#bg)"/>
+
+  <!-- Minimalist red accent line, animated sweep -->
+  <rect x="0" y="0" width="800" height="2" fill="#ff2d2d">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="0" y="198" width="800" height="2" fill="#ff2d2d">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Main text: solar bypasser, fast, free -->
+  <text x="400" y="95" text-anchor="middle" dominant-baseline="middle"
+        font-family="Helvetica, Arial, sans-serif" font-size="42" font-weight="700"
+        fill="url(#textGrad)" letter-spacing="2" filter="url(#glow)">
+    solar bypasser, fast, free
+    <animate attributeName="opacity" values="0.85;1;0.85" dur="2.5s" repeatCount="indefinite"/>
+  </text>
+
+  <!-- URL: appears for 3s, then removed, loops every 7s -->
+  <!-- Cycle: 0-2s hidden, 2-3s fade in, 3-6s visible, 6-7s fade out, 7s loop -->
+  <text x="400" y="150" text-anchor="middle" dominant-baseline="middle"
+        font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="500"
+        fill="#ff6a3d" letter-spacing="1" opacity="0">
+    solarbypasser.vercel.app
+    <animate attributeName="opacity"
+             values="0;0;1;1;0"
+             keyTimes="0;0.285;0.428;0.857;1"
+             dur="7s"
+             repeatCount="indefinite"/>
+    <animate attributeName="font-size"
+             values="20;22;22;22;20"
+             keyTimes="0;0.428;0.571;0.857;1"
+             dur="7s"
+             repeatCount="indefinite"/>
+  </text>
+
+  <!-- Minimalist cursor dot that pulses when URL is visible -->
+  <circle cx="640" cy="150" r="3" fill="#ff2d2d" opacity="0">
+    <animate attributeName="opacity"
+             values="0;0;1;1;0"
+             keyTimes="0;0.285;0.428;0.857;1"
+             dur="7s"
+             repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Subtle scanline for minimalist tech feel -->
+  <rect x="0" y="0" width="800" height="200" fill="#ff2d2d" opacity="0.02">
+    <animate attributeName="y" values="-200;200" dur="4s" repeatCount="indefinite"/>
+  </rect>
+</svg>
