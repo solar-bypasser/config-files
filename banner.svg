@@ -1,71 +1,82 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="100%" height="auto" role="img" aria-label="solar bypasser, fast, free">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 220" width="100%" height="auto" role="img" aria-label="solar bypasser, fast, free">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0a0a0a"/>
-      <stop offset="100%" stop-color="#1a0606"/>
-    </linearGradient>
-    <linearGradient id="textGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#ff2d2d"/>
-      <stop offset="50%" stop-color="#ff6a3d"/>
-      <stop offset="100%" stop-color="#ff2d2d"/>
-    </linearGradient>
-    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
+    <!-- Clip rect for typewriter reveal of the main message -->
+    <clipPath id="msgClip">
+      <rect x="60" y="50" width="0" height="80">
+        <animate attributeName="width"
+                 values="0;0;340;340;0;0"
+                 keyTimes="0;0.038;0.192;0.346;0.423;1"
+                 dur="13s"
+                 repeatCount="indefinite"/>
+      </rect>
+    </clipPath>
+    <!-- Clip rect for typewriter reveal of the URL -->
+    <clipPath id="urlClip">
+      <rect x="60" y="50" width="0" height="80">
+        <animate attributeName="width"
+                 values="0;0;460;460;0"
+                 keyTimes="0;0.500;0.731;0.962;1"
+                 dur="13s"
+                 repeatCount="indefinite"/>
+      </rect>
+    </clipPath>
   </defs>
 
-  <!-- Background -->
-  <rect width="800" height="200" fill="url(#bg)"/>
+  <!-- Pure black background -->
+  <rect width="800" height="220" fill="#000000"/>
 
-  <!-- Minimalist red accent line, animated sweep -->
-  <rect x="0" y="0" width="800" height="2" fill="#ff2d2d">
-    <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
-  </rect>
-  <rect x="0" y="198" width="800" height="2" fill="#ff2d2d">
-    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
-  </rect>
+  <!-- Thin red accent lines (top & bottom) -->
+  <rect x="0" y="0"   width="800" height="1" fill="#cc0000"/>
+  <rect x="0" y="219" width="800" height="1" fill="#cc0000"/>
 
-  <!-- Main text: solar bypasser, fast, free -->
-  <text x="400" y="95" text-anchor="middle" dominant-baseline="middle"
-        font-family="Helvetica, Arial, sans-serif" font-size="42" font-weight="700"
-        fill="url(#textGrad)" letter-spacing="2" filter="url(#glow)">
-    solar bypasser, fast, free
-    <animate attributeName="opacity" values="0.85;1;0.85" dur="2.5s" repeatCount="indefinite"/>
+  <!-- Typewriter line: solar bypasser (light gray, large) -->
+  <text x="60" y="100"
+        font-family="'Courier New', Courier, monospace"
+        font-size="36" font-weight="bold"
+        fill="#e8e8e8" letter-spacing="2"
+        clip-path="url(#msgClip)">
+    solar bypasser
   </text>
 
-  <!-- URL: appears for 3s, then removed, loops every 7s -->
-  <!-- Cycle: 0-2s hidden, 2-3s fade in, 3-6s visible, 6-7s fade out, 7s loop -->
-  <text x="400" y="150" text-anchor="middle" dominant-baseline="middle"
-        font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="500"
-        fill="#ff6a3d" letter-spacing="1" opacity="0">
+  <!-- Typewriter line: URL (red, medium) -->
+  <text x="60" y="100"
+        font-family="'Courier New', Courier, monospace"
+        font-size="28"
+        fill="#cc0000" letter-spacing="1"
+        clip-path="url(#urlClip)">
     solarbypasser.vercel.app
-    <animate attributeName="opacity"
-             values="0;0;1;1;0"
-             keyTimes="0;0.285;0.428;0.857;1"
-             dur="7s"
-             repeatCount="indefinite"/>
-    <animate attributeName="font-size"
-             values="20;22;22;22;20"
-             keyTimes="0;0.428;0.571;0.857;1"
-             dur="7s"
-             repeatCount="indefinite"/>
   </text>
 
-  <!-- Minimalist cursor dot that pulses when URL is visible -->
-  <circle cx="640" cy="150" r="3" fill="#ff2d2d" opacity="0">
+  <!-- Cursor: blinking red bar that follows the typed text -->
+  <!-- Group opacity hides cursor during pause & final URL delete -->
+  <g>
     <animate attributeName="opacity"
-             values="0;0;1;1;0"
-             keyTimes="0;0.285;0.428;0.857;1"
-             dur="7s"
+             values="0;1;0;1;0"
+             keyTimes="0;0.038;0.423;0.500;0.962"
+             dur="13s"
+             calcMode="discrete"
              repeatCount="indefinite"/>
-  </circle>
+    <rect x="60" y="68" width="3" height="36" fill="#cc0000">
+      <!-- Rapid blink -->
+      <animate attributeName="opacity"
+               values="1;0"
+               keyTimes="0;0.5"
+               dur="0.8s"
+               calcMode="discrete"
+               repeatCount="indefinite"/>
+      <!-- Cursor x follows the right edge of the currently typed text -->
+      <animate attributeName="x"
+               values="60;60;400;400;60;60;520;520;60"
+               keyTimes="0;0.038;0.192;0.346;0.423;0.500;0.731;0.962;1"
+               dur="13s"
+               repeatCount="indefinite"/>
+    </rect>
+  </g>
 
-  <!-- Subtle scanline for minimalist tech feel -->
-  <rect x="0" y="0" width="800" height="200" fill="#ff2d2d" opacity="0.02">
-    <animate attributeName="y" values="-200;200" dur="4s" repeatCount="indefinite"/>
-  </rect>
+  <!-- Static tagline at bottom -->
+  <text x="400" y="190" text-anchor="middle"
+        font-family="'Courier New', Courier, monospace"
+        font-size="14" fill="#444444" letter-spacing="8">
+    fast · free
+  </text>
 </svg>
